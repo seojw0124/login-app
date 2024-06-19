@@ -1,3 +1,19 @@
 <resources>
+    <!--  SignIn  -->
     <string name="app_name">LoginApp</string>
+    <string name="label_user_id">아이디</string>
+    <string name="description_logo_image">로그인 화면에서 보여주는 로고 이미지</string>
+    <string name="label_password">비밀번호</string>
+    <string name="hint_input_user_id">아이디를 입력하세요.</string>
+    <string name="hint_input_password">비밀번호를 입력하세요.</string>
+    <string name="btn_label_sign_in">로그인</string>
+    <string name="btn_label_sign_up">회원가입</string>
+
+    <!--  Home  -->
+    <string name="description_home_image">홈 화면에서 랜덤으로 보여주는 이미지</string>
+    <string name="label_home_user_id">아이디 :</string>
+    <string name="label_home_user_name">이름 :</string>
+    <string name="label_home_age">나이: </string>
+    <string name="label_home_mbti">MBTI :</string>
+    <string name="btn_label_close">종료</string>
 </resources>
