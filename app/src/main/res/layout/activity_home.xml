@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
         android:id="@+id/ll_user_name"
@@ -140,7 +140,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_sign_up"
+        android:id="@+id/btn_close"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginBottom="40dp"

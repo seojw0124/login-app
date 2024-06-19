@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    tools:context=".SignUpActivity">
+
+    <ImageView
+        android:id="@+id/iv_logo_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/description_logo_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_sign_up_user_name_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/label_user_name"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_logo_image" />
+
+    <EditText
+        android:id="@+id/et_input_sign_up_user_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:hint="@string/hint_input_user_name"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@id/tv_sign_up_user_name_label"
+        app:layout_constraintStart_toStartOf="@id/tv_sign_up_user_name_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_sign_up_user_name_label" />
+
+    <TextView
+        android:id="@+id/tv_sign_up_user_id_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/label_user_id"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/et_input_sign_up_user_name"
+        app:layout_constraintStart_toStartOf="@id/et_input_sign_up_user_name"
+        app:layout_constraintTop_toBottomOf="@id/et_input_sign_up_user_name" />
+
+    <EditText
+        android:id="@+id/et_input_sign_up_user_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:hint="@string/hint_input_user_id"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@id/tv_sign_up_user_id_label"
+        app:layout_constraintStart_toStartOf="@id/tv_sign_up_user_id_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_sign_up_user_id_label" />
+
+    <TextView
+        android:id="@+id/tv_sign_up_password_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/label_password"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/et_input_sign_up_user_id"
+        app:layout_constraintStart_toStartOf="@id/et_input_sign_up_user_id"
+        app:layout_constraintTop_toBottomOf="@id/et_input_sign_up_user_id" />
+
+    <EditText
+        android:id="@+id/et_input_sign_up_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:hint="@string/hint_input_password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@id/tv_sign_up_password_label"
+        app:layout_constraintStart_toStartOf="@id/tv_sign_up_password_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_sign_up_password_label" />
+
+    <TextView
+        android:id="@+id/tv_sign_up_age_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/label_age"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/et_input_sign_up_password"
+        app:layout_constraintStart_toStartOf="@id/et_input_sign_up_password"
+        app:layout_constraintTop_toBottomOf="@id/et_input_sign_up_password" />
+
+    <EditText
+        android:id="@+id/et_input_sign_up_age"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:hint="@string/hint_input_age"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@id/tv_sign_up_age_label"
+        app:layout_constraintStart_toStartOf="@id/tv_sign_up_age_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_sign_up_age_label" />
+
+    <TextView
+        android:id="@+id/tv_sign_up_mbti_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/label_mbti"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/et_input_sign_up_age"
+        app:layout_constraintStart_toStartOf="@id/et_input_sign_up_age"
+        app:layout_constraintTop_toBottomOf="@id/et_input_sign_up_age" />
+
+    <EditText
+        android:id="@+id/et_input_sign_up_mbti"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:hint="@string/hint_input_mbti"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@id/tv_sign_up_mbti_label"
+        app:layout_constraintStart_toStartOf="@id/tv_sign_up_mbti_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_sign_up_mbti_label" />
+
+    <Button
+        android:id="@+id/btn_sign_up_complete"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/btn_label_sign_up"
+        app:layout_constraintEnd_toEndOf="@id/et_input_sign_up_mbti"
+        app:layout_constraintStart_toStartOf="@id/et_input_sign_up_mbti"
+        app:layout_constraintTop_toBottomOf="@id/et_input_sign_up_mbti" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
