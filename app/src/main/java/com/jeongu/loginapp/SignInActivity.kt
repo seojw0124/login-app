@@ -17,16 +17,20 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-        val userIdData = intent.getStringExtra("userId")
-        val passwordData = intent.getStringExtra("password")
-        val etInputSignInUserId = findViewById<EditText>(R.id.et_input_sign_in_user_id)
-        etInputSignInUserId.setText(userIdData)
-        val etInputSignInPassword = findViewById<EditText>(R.id.et_input_sign_in_password)
-        etInputSignInPassword.setText(passwordData)
+        setLayout()
+        signIn()
+        goToSignUp()
+    }
 
-        Log.d(TAG, "userIdData: $userIdData, passwordData: $passwordData")
+    private fun goToSignUp() {
+        val btnGoToSignUp = findViewById<Button>(R.id.btn_go_to_sign_up)
+        btnGoToSignUp.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
-
+    private fun signIn() {
         val btnSignIn = findViewById<Button>(R.id.btn_sign_in)
         btnSignIn.setOnClickListener {
             val userId = findViewById<EditText>(R.id.et_input_sign_in_user_id).text.toString()
@@ -42,11 +46,15 @@ class SignInActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
         }
+    }
 
-        val btnSignUp = findViewById<Button>(R.id.btn_sign_up)
-        btnSignUp.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
-        }
+    private fun setLayout() {
+        val userIdData = intent.getStringExtra("userId")
+        val passwordData = intent.getStringExtra("password")
+
+        val etInputSignInUserId = findViewById<EditText>(R.id.et_input_sign_in_user_id)
+        etInputSignInUserId.setText(userIdData)
+        val etInputSignInPassword = findViewById<EditText>(R.id.et_input_sign_in_password)
+        etInputSignInPassword.setText(passwordData)
     }
 }

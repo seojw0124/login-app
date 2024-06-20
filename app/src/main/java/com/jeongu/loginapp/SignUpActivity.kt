@@ -17,24 +17,30 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        val btnSignUpComplete = findViewById<Button>(R.id.btn_sign_up_complete)
+        signUp()
+    }
 
-        btnSignUpComplete.setOnClickListener {
-            val userName = findViewById<EditText>(R.id.et_input_sign_up_user_name).text.toString()
-            val userId = findViewById<EditText>(R.id.et_input_sign_up_user_id).text.toString()
-            val password = findViewById<EditText>(R.id.et_input_sign_up_password).text.toString()
-            val age = findViewById<EditText>(R.id.et_input_sign_up_age).text.toString().toInt()
-            val mbti = findViewById<EditText>(R.id.et_input_sign_up_mbti).text.toString()
-
-            val user = UserInfo(userName, userId, password, age, mbti)
-            Storage.saveUser(user)
-            Log.d(TAG, "user: $user")
-
+    private fun signUp() {
+        val btnSignUp = findViewById<Button>(R.id.btn_sign_up)
+        btnSignUp.setOnClickListener {
+            val user = saveUserInfo()
             val intent = Intent(this, SignInActivity::class.java)
-            intent.putExtra("userId", userId)
-            intent.putExtra("password", password)
-
+            intent.putExtra("userId", user.userId)
+            intent.putExtra("password", user.password)
             startActivity(intent)
         }
+    }
+
+    private fun saveUserInfo(): UserInfo {
+        val userName = findViewById<EditText>(R.id.et_input_sign_up_user_name).text.toString()
+        val userId = findViewById<EditText>(R.id.et_input_sign_up_user_id).text.toString()
+        val password = findViewById<EditText>(R.id.et_input_sign_up_password).text.toString()
+        val age = findViewById<EditText>(R.id.et_input_sign_up_age).text.toString().toInt()
+        val mbti = findViewById<EditText>(R.id.et_input_sign_up_mbti).text.toString()
+
+        val user = UserInfo(userName, userId, password, age, mbti)
+        Storage.saveUser(user)
+
+        return user
     }
 }
