@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.jeongu.loginapp.data.Storage
+import com.jeongu.loginapp.data.UserInfo
 
 class SignUpActivity : AppCompatActivity() {
+
+    private val TAG = "SignUpActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -25,8 +27,8 @@ class SignUpActivity : AppCompatActivity() {
             val mbti = findViewById<EditText>(R.id.et_input_sign_up_mbti).text.toString()
 
             val user = UserInfo(userName, userId, password, age, mbti)
-
-            Log.d("SignUpActivity", "user: $user")
+            Storage.saveUser(user)
+            Log.d(TAG, "user: $user")
 
             val intent = Intent(this, SignInActivity::class.java)
             intent.putExtra("userId", userId)

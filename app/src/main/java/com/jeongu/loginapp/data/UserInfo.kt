@@ -1,4 +1,4 @@
-package com.jeongu.loginapp
+package com.jeongu.loginapp.data
 
 data class UserInfo(
     val userName: String,
