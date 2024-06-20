@@ -1,7 +1,6 @@
 package com.jeongu.loginapp
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +14,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setLayout()
-        onBtnCloseClick()
+        goBackToSignIn()
     }
 
     private fun setLayout() {
@@ -30,11 +29,11 @@ class HomeActivity : AppCompatActivity() {
         tvHomeUserName.text = user?.userName
         val tvHomeAge = findViewById<TextView>(R.id.tv_home_age)
         tvHomeAge.text = user?.age.toString()
-        val tvMbti = findViewById<TextView>(R.id.tv_home_mbti)
-        tvMbti.text = user?.mbti
+        val tvHomeMbti = findViewById<TextView>(R.id.tv_home_mbti)
+        tvHomeMbti.text = user?.mbti
     }
 
-    private fun onBtnCloseClick() {
+    private fun goBackToSignIn() {
         val btnClose = findViewById<Button>(R.id.btn_close)
         btnClose.setOnClickListener {
             finish()
