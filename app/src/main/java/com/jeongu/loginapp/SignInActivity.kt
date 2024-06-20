@@ -37,12 +37,12 @@ class SignInActivity : AppCompatActivity() {
             val password = findViewById<EditText>(R.id.et_input_sign_in_password).text.toString()
             // 둘 중 하나라도 입력되지 않았을 경우
             if (userId.isNotBlank() && password.isNotBlank()) { // isNotEmpty()는 공백이 있으면 true를 반환하지만 isNotBlank()는 공백이 있으면 false를 반환
-                Toast.makeText(this, "성공적으로 로그인하였습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "userId: $userId, password: $password")
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
             } else {
-                Snackbar.make(it, "아이디와 비밀번호를 입력해주세요.", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(it, "아이디/비밀번호를 확인해주세요", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
         }
