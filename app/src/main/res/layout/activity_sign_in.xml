@@ -14,10 +14,10 @@
         android:layout_height="200dp"
         android:layout_marginTop="60dp"
         android:contentDescription="@string/description_logo_image"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@mipmap/ic_launcher" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_sign_in_user_id_label"
