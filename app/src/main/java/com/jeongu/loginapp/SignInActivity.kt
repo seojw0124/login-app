@@ -30,8 +30,9 @@ class SignInActivity : AppCompatActivity() {
                 val userIdData = it.data?.getStringExtra("userId") ?: ""
                 val passwordData = it.data?.getStringExtra("password") ?: ""
                 val etInputSignInUserId = findViewById<EditText>(R.id.et_input_sign_in_user_id)
-                etInputSignInUserId.setText(userIdData)
                 val etInputSignInPassword = findViewById<EditText>(R.id.et_input_sign_in_password)
+
+                etInputSignInUserId.setText(userIdData)
                 etInputSignInPassword.setText(passwordData)
             }
         }
@@ -55,19 +56,19 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    private fun showToast(isSuccessful: Boolean) {
-        if (isSuccessful) {
-            Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "아이디/비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     private fun navigateToSignUp() {
         val btnGoToSignUp = findViewById<Button>(R.id.btn_go_to_sign_up)
         btnGoToSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             signUpResult.launch(intent)
+        }
+    }
+
+    private fun showToast(isSuccessful: Boolean) {
+        if (isSuccessful) {
+            Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "아이디/비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
         }
     }
 }

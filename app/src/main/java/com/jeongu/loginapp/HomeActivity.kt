@@ -24,12 +24,13 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showUserInfo(user: UserInfo) {
         val tvHomeUserId = findViewById<TextView>(R.id.tv_home_user_id)
-        tvHomeUserId.text = String.format(resources.getString(R.string.text_home_user_id), user.userId)
         val tvHomeUserName = findViewById<TextView>(R.id.tv_home_user_name)
-        tvHomeUserName.text = String.format(resources.getString(R.string.text_home_user_name), user.userName)
         val tvHomeAge = findViewById<TextView>(R.id.tv_home_age)
-        tvHomeAge.text = String.format(resources.getString(R.string.text_home_age), user.age.toString())
         val tvHomeMbti = findViewById<TextView>(R.id.tv_home_mbti)
+
+        tvHomeUserId.text = String.format(resources.getString(R.string.text_home_user_id), user.userId)
+        tvHomeUserName.text = String.format(resources.getString(R.string.text_home_user_name), user.userName)
+        tvHomeAge.text = String.format(resources.getString(R.string.text_home_age), user.age.toString())
         tvHomeMbti.text = String.format(resources.getString(R.string.text_home_mbti), user.mbti)
     }
 

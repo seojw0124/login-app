@@ -35,16 +35,17 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun setTextInput() {
-        val etInputSignUpUserName = findViewById<EditText>(R.id.et_input_sign_up_user_name)
-        checkValidInput(etInputSignUpUserName)
-        val etInputSignUpUserId = findViewById<EditText>(R.id.et_input_sign_up_user_id)
-        checkValidInput(etInputSignUpUserId)
-        val etInputSignUpPassword = findViewById<EditText>(R.id.et_input_sign_up_password)
-        checkValidInput(etInputSignUpPassword)
-        val etInputSignUpAge = findViewById<EditText>(R.id.et_input_sign_up_age)
-        checkValidInput(etInputSignUpAge)
-        val etInputSignUpMbti = findViewById<EditText>(R.id.et_input_sign_up_mbti)
-        checkValidInput(etInputSignUpMbti)
+        val etInputUserName = findViewById<EditText>(R.id.et_input_sign_up_user_name)
+        val etInputUserId = findViewById<EditText>(R.id.et_input_sign_up_user_id)
+        val etInputPassword = findViewById<EditText>(R.id.et_input_sign_up_password)
+        val etInputAge = findViewById<EditText>(R.id.et_input_sign_up_age)
+        val etInputMbti = findViewById<EditText>(R.id.et_input_sign_up_mbti)
+
+        checkValidInput(etInputUserName)
+        checkValidInput(etInputUserId)
+        checkValidInput(etInputPassword)
+        checkValidInput(etInputAge)
+        checkValidInput(etInputMbti)
     }
 
     // 입력값이 유효한지 확인하는 함수
@@ -55,6 +56,7 @@ class SignUpActivity : AppCompatActivity() {
                 R.id.et_input_sign_up_user_name -> {
                     userName = inputValue
                     isValidUserName = isValidInput(userName)
+                    Log.d(TAG, "userName: $userName")
                 }
                 R.id.et_input_sign_up_user_id -> {
                     userId = inputValue
@@ -93,7 +95,8 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun successSignUp() {
-        val user = saveUserInfo()
+        val user = UserInfo(userName, userId, password, age, mbti)
+        Storage.saveUser(user)
         val intent = Intent(this, SignInActivity::class.java)
         intent.apply {
             putExtra("userId", user.userId)
@@ -103,19 +106,6 @@ class SignUpActivity : AppCompatActivity() {
         Log.d(TAG, "signUp: $intent")
         showToast(true)
         finish()
-    }
-
-    private fun saveUserInfo(): UserInfo {
-        val userName = findViewById<EditText>(R.id.et_input_sign_up_user_name).text.toString()
-        val userId = findViewById<EditText>(R.id.et_input_sign_up_user_id).text.toString()
-        val password = findViewById<EditText>(R.id.et_input_sign_up_password).text.toString()
-        val age = findViewById<EditText>(R.id.et_input_sign_up_age).text.toString().toInt()
-        val mbti = findViewById<EditText>(R.id.et_input_sign_up_mbti).text.toString()
-
-        val user = UserInfo(userName, userId, password, age, mbti)
-        Storage.saveUser(user)
-
-        return user
     }
 
     private fun showToast(isSuccessful: Boolean) {
