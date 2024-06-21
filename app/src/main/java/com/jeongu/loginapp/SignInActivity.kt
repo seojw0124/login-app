@@ -6,27 +6,34 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 
 class SignInActivity : AppCompatActivity() {
 
     private val TAG = "SignInActivity"
+    private lateinit var signUpResult: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-        setLayout()
+        setTextInput()
         signIn()
-        goToSignUp()
+        navigateToSignUp()
     }
 
-    private fun goToSignUp() {
-        val btnGoToSignUp = findViewById<Button>(R.id.btn_go_to_sign_up)
-        btnGoToSignUp.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
+    private fun setTextInput() {
+        signUpResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                val userIdData = it.data?.getStringExtra("userId") ?: ""
+                val passwordData = it.data?.getStringExtra("password") ?: ""
+                val etInputSignInUserId = findViewById<EditText>(R.id.et_input_sign_in_user_id)
+                etInputSignInUserId.setText(userIdData)
+                val etInputSignInPassword = findViewById<EditText>(R.id.et_input_sign_in_password)
+                etInputSignInPassword.setText(passwordData)
+            }
         }
     }
 
@@ -37,24 +44,30 @@ class SignInActivity : AppCompatActivity() {
             val password = findViewById<EditText>(R.id.et_input_sign_in_password).text.toString()
             // 둘 중 하나라도 입력되지 않았을 경우
             if (userId.isNotBlank() && password.isNotBlank()) { // isNotEmpty()는 공백이 있으면 true를 반환하지만 isNotBlank()는 공백이 있으면 false를 반환
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                showToast(true)
                 Log.d(TAG, "userId: $userId, password: $password")
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
             } else {
-                Snackbar.make(it, "아이디/비밀번호를 확인해주세요", Snackbar.LENGTH_SHORT).show()
+                showToast(false)
                 return@setOnClickListener
             }
         }
     }
 
-    private fun setLayout() {
-        val userIdData = intent.getStringExtra("userId")
-        val passwordData = intent.getStringExtra("password")
+    private fun showToast(isSuccessful: Boolean) {
+        if (isSuccessful) {
+            Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "아이디/비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
+        }
+    }
 
-        val etInputSignInUserId = findViewById<EditText>(R.id.et_input_sign_in_user_id)
-        etInputSignInUserId.setText(userIdData)
-        val etInputSignInPassword = findViewById<EditText>(R.id.et_input_sign_in_password)
-        etInputSignInPassword.setText(passwordData)
+    private fun navigateToSignUp() {
+        val btnGoToSignUp = findViewById<Button>(R.id.btn_go_to_sign_up)
+        btnGoToSignUp.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            signUpResult.launch(intent)
+        }
     }
 }

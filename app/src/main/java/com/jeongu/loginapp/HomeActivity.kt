@@ -14,7 +14,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setLayout()
-        goBackToSignIn()
+        navigateToSignIn()
     }
 
     private fun setLayout() {
@@ -33,7 +33,7 @@ class HomeActivity : AppCompatActivity() {
         tvHomeMbti.text = user?.mbti
     }
 
-    private fun goBackToSignIn() {
+    private fun navigateToSignIn() {
         val btnClose = findViewById<Button>(R.id.btn_close)
         btnClose.setOnClickListener {
             finish()

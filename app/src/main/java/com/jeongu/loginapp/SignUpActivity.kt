@@ -36,34 +36,43 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun setTextInput() {
         val etInputSignUpUserName = findViewById<EditText>(R.id.et_input_sign_up_user_name)
-        etInputSignUpUserName.doAfterTextChanged {
-            Log.d(TAG, "userName: ${etInputSignUpUserName.text}")
-            userName = it?.toString() ?: ""
-            isValidUserName = isValidInput(userName)
-        }
+        checkValidInput(etInputSignUpUserName)
         val etInputSignUpUserId = findViewById<EditText>(R.id.et_input_sign_up_user_id)
-        etInputSignUpUserId.doAfterTextChanged {
-            Log.d(TAG, "userId: ${etInputSignUpUserId.text}")
-            userId = it?.toString() ?: ""
-            isValidUserId = isValidInput(userId)
-        }
+        checkValidInput(etInputSignUpUserId)
         val etInputSignUpPassword = findViewById<EditText>(R.id.et_input_sign_up_password)
-        etInputSignUpPassword.doAfterTextChanged {
-            Log.d(TAG, "password: ${etInputSignUpPassword.text}")
-            password = it?.toString() ?: ""
-            isValidPassword = isValidInput(password)
-        }
+        checkValidInput(etInputSignUpPassword)
         val etInputSignUpAge = findViewById<EditText>(R.id.et_input_sign_up_age)
-        etInputSignUpAge.doAfterTextChanged {
-            Log.d(TAG, "age: ${etInputSignUpAge.text}")
-            age = it?.toString()?.toInt() ?: 0
-            isValidAge = isValidInput(age.toString())
-        }
+        checkValidInput(etInputSignUpAge)
         val etInputSignUpMbti = findViewById<EditText>(R.id.et_input_sign_up_mbti)
-        etInputSignUpMbti.doAfterTextChanged {
-            Log.d(TAG, "mbti: ${etInputSignUpMbti.text}")
-            mbti = it?.toString() ?: ""
-            isValidMbti = isValidInput(mbti)
+        checkValidInput(etInputSignUpMbti)
+    }
+
+    // 입력값이 유효한지 확인하는 함수
+    private fun checkValidInput(editText: EditText) {
+        editText.doAfterTextChanged {
+            val inputValue = it?.toString() ?: ""
+            when (editText.id) {
+                R.id.et_input_sign_up_user_name -> {
+                    userName = inputValue
+                    isValidUserName = isValidInput(userName)
+                }
+                R.id.et_input_sign_up_user_id -> {
+                    userId = inputValue
+                    isValidUserId = isValidInput(userId)
+                }
+                R.id.et_input_sign_up_password -> {
+                    password = inputValue
+                    isValidPassword = isValidInput(password)
+                }
+                R.id.et_input_sign_up_age -> {
+                    age = inputValue.toInt()
+                    isValidAge = isValidInput(age.toString())
+                }
+                R.id.et_input_sign_up_mbti -> {
+                    mbti = inputValue
+                    isValidMbti = isValidInput(mbti)
+                }
+            }
         }
     }
 
@@ -75,17 +84,25 @@ class SignUpActivity : AppCompatActivity() {
         val btnSignUp = findViewById<Button>(R.id.btn_sign_up)
         btnSignUp.setOnClickListener {
             if (isValidUserName && isValidUserId && isValidPassword && isValidAge && isValidMbti) {
-                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                val user = saveUserInfo()
-                val intent = Intent(this, SignInActivity::class.java)
-                intent.putExtra("userId", user.userId)
-                intent.putExtra("password", user.password)
-                startActivity(intent)
+                successSignUp()
             } else {
-                Toast.makeText(this, "입력되지 않은 정보가 있습니다", Toast.LENGTH_SHORT).show()
+                showToast(false)
                 return@setOnClickListener
             }
         }
+    }
+
+    private fun successSignUp() {
+        val user = saveUserInfo()
+        val intent = Intent(this, SignInActivity::class.java)
+        intent.apply {
+            putExtra("userId", user.userId)
+            putExtra("password", user.password)
+        }
+        setResult(RESULT_OK, intent)
+        Log.d(TAG, "signUp: $intent")
+        showToast(true)
+        finish()
     }
 
     private fun saveUserInfo(): UserInfo {
@@ -99,5 +116,13 @@ class SignUpActivity : AppCompatActivity() {
         Storage.saveUser(user)
 
         return user
+    }
+
+    private fun showToast(isSuccessful: Boolean) {
+        if (isSuccessful) {
+            Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "입력되지 않은 정보가 있습니다", Toast.LENGTH_SHORT).show()
+        }
     }
 }
