@@ -11,6 +11,8 @@ import androidx.core.widget.doAfterTextChanged
 import com.jeongu.loginapp.data.Storage
 import com.jeongu.loginapp.data.UserInfo
 
+private const val PASSWORD_FORMAT_LENGTH = 10
+
 class SignUpActivity : AppCompatActivity() {
 
     private val TAG = "SignUpActivity"
@@ -60,11 +62,11 @@ class SignUpActivity : AppCompatActivity() {
                 }
                 R.id.et_input_sign_up_user_id -> {
                     userId = inputValue
-                    isValidUserId = isValidInput(userId)
+                    isValidUserId = isValidUserId(userId)
                 }
                 R.id.et_input_sign_up_password -> {
                     password = inputValue
-                    isValidPassword = isValidInput(password)
+                    isValidPassword = isValidPassword(password)
                 }
                 R.id.et_input_sign_up_age -> {
                     age = inputValue.toInt()
@@ -82,12 +84,29 @@ class SignUpActivity : AppCompatActivity() {
         return input.isNotBlank()
     }
 
+    private fun isValidUserId(input: String): Boolean {
+        // 영어와 숫자만 입력 가능
+        return input.isNotBlank() && input.matches(Regex("^[a-zA-Z0-9]*$"))
+    }
+
+    private fun isValidPassword(input: String): Boolean {
+        return input.isNotBlank() && input.length >= PASSWORD_FORMAT_LENGTH
+    }
+
     private fun signUp() {
         val btnSignUp = findViewById<Button>(R.id.btn_sign_up)
         btnSignUp.setOnClickListener {
             if (isValidUserName && isValidUserId && isValidPassword && isValidAge && isValidMbti) {
                 successSignUp()
             } else {
+                when {
+                    !isValidUserName -> Log.d(TAG, "isValidUserName: $userName")
+                    !isValidUserId -> Log.d(TAG, "isValidUserId: $userId")
+                    !isValidPassword -> Log.d(TAG, "isValidPassword: $password")
+                    !isValidAge -> Log.d(TAG, "isValidAge: $age")
+                    !isValidMbti -> Log.d(TAG, "isValidMbti: $mbti")
+                }
+
                 showToast(false)
                 return@setOnClickListener
             }
