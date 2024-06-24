@@ -18,7 +18,7 @@
     <string name="hint_input_mbti">mbti를 입력하세요.</string>
 
     <!--  Home  -->
-    <string name="description_home_image">홈 화면에서 랜덤으로 보여주는 이미지</string>
+    <string name="description_home_image">홈 화면에서 랜덤으로 보여주는 커피 이미지</string>
     <string name="text_home_user_id">아이디 : %s</string>
     <string name="text_home_user_name">이름 : %s</string>
     <string name="text_home_age">나이 : %s</string>
