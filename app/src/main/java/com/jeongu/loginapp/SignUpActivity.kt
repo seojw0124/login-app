@@ -12,7 +12,7 @@ import androidx.core.widget.doAfterTextChanged
 import com.jeongu.loginapp.data.Storage
 import com.jeongu.loginapp.data.UserInfo
 
-private const val PASSWORD_FORMAT_LENGTH = 10
+private const val PASSWORD_FORMAT_LENGTH = 7
 private const val AGE_FORMAT_LENGTH = 3
 
 class SignUpActivity : AppCompatActivity() {
@@ -46,11 +46,11 @@ class SignUpActivity : AppCompatActivity() {
     private fun setTextInput() {
         setMaxLength(etInputAge)
 
-        checkValidInput(etInputUserName)
-        checkValidInput(etInputUserId)
-        checkValidInput(etInputPassword)
-        checkValidInput(etInputAge)
-        checkValidInput(etInputFavoriteDrink)
+        checkValidSignUpInput(etInputUserName)
+        checkValidSignUpInput(etInputUserId)
+        checkValidSignUpInput(etInputPassword)
+        checkValidSignUpInput(etInputAge)
+        checkValidSignUpInput(etInputFavoriteDrink)
     }
 
     private fun setMaxLength(editText: EditText) {
@@ -58,7 +58,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     // 입력값이 유효한지 확인하는 함수
-    private fun checkValidInput(editText: EditText) {
+    private fun checkValidSignUpInput(editText: EditText) {
         editText.doAfterTextChanged {
             val inputValue = it?.toString() ?: ""
             when (editText) {

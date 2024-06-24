@@ -1,5 +1,6 @@
 package com.jeongu.loginapp
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -11,6 +12,8 @@ import com.jeongu.loginapp.data.UserInfo
 import kotlin.random.Random
 
 class HomeActivity : AppCompatActivity() {
+
+    private val TAG = "HomeActivity"
 
     private val drinks = mapOf(
         1 to R.drawable.ic_coffee_1,
@@ -31,8 +34,13 @@ class HomeActivity : AppCompatActivity() {
     private fun setLayout() {
         setRandomImage()
 
-        val userId = intent.getStringExtra("userId") ?: ""
-        val user = Storage.getUser(userId)
+        // userInfo 가져오기
+        val user = if (Build.VERSION.SDK_INT >= 33) {
+            intent.getParcelableExtra("user", UserInfo::class.java)
+        } else {
+            intent.getParcelableExtra("user")
+        }
+
         user?.let {
             setUserInfo(it)
         }
@@ -44,7 +52,7 @@ class HomeActivity : AppCompatActivity() {
         val ivHomeCoffeeImage = findViewById<ImageView>(R.id.iv_home_image)
 
         ivHomeCoffeeImage.setImageResource(drinks[num] ?: R.drawable.ic_coffee_1)
-        Log.d("HomeActivity", "random: $num")
+        Log.d(TAG, "random: $num")
     }
 
     private fun setUserInfo(user: UserInfo) {

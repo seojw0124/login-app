@@ -2,7 +2,6 @@ package com.jeongu.loginapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -16,12 +15,8 @@ class SignInActivity : AppCompatActivity() {
     private val TAG = "SignInActivity"
     private lateinit var signUpResult: ActivityResultLauncher<Intent>
 
-    private val etInputSignInUserId by lazy {
-        findViewById<EditText>(R.id.et_input_sign_in_user_id)
-    }
-    private val etInputSignInPassword by lazy {
-        findViewById<EditText>(R.id.et_input_sign_in_password)
-    }
+    private val etInputSignInUserId by lazy { findViewById<EditText>(R.id.et_input_sign_in_user_id) }
+    private val etInputSignInPassword by lazy { findViewById<EditText>(R.id.et_input_sign_in_password) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,38 +44,44 @@ class SignInActivity : AppCompatActivity() {
     private fun signIn() {
         val btnSignIn = findViewById<Button>(R.id.btn_sign_in)
         btnSignIn.setOnClickListener {
-            val userId = etInputSignInUserId.text.toString()
-            val password = etInputSignInPassword.text.toString()
-            // 둘 중 하나라도 입력되지 않았을 경우
-            if (userId.isNotBlank() && password.isNotBlank()) { // isNotEmpty()는 공백이 있으면 true를 반환하지만 isNotBlank()는 공백이 있어도 false를 반환
-                val user = Storage.getUser(userId)
-                if (user != null) {
-                    if (user.password == password) {
-                        showToast("success")
-                        val intent = Intent(this, HomeActivity::class.java)
-                        intent.putExtra("userId", userId)
-                        startActivity(intent)
-                    } else {
-                        etInputSignInPassword.apply {
-                            setText("") // vs getText().clear() -> text.clear()는 API 28부터 사용 가능
-                            requestFocus()
-                        }
-                        showToast("no_password")
-                        return@setOnClickListener
-                    }
+            checkValidSignInInput()
+        }
+    }
+
+    private fun checkValidSignInInput() {
+        val userId = etInputSignInUserId.text.toString()
+        val password = etInputSignInPassword.text.toString()
+        // 둘 중 하나라도 입력되지 않았을 경우
+        if (userId.isNotBlank() && password.isNotBlank()) { // isNotEmpty()는 공백이 있으면 true를 반환하지만 isNotBlank()는 공백이 있어도 false를 반환
+            val user = Storage.getUser(userId)
+            if (user != null) {
+                if (user.password == password) {
+                    showToast("success")
+                    val intent = Intent(this, HomeActivity::class.java)
+                    intent.putExtra("user", user)
+                    startActivity(intent)
                 } else {
-                    etInputSignInUserId.apply {
-                        setText("")
+                    etInputSignInPassword.apply {
+                        setText("") // vs getText().clear() -> text.clear()는 API 28부터 사용 가능
                         requestFocus()
+                        // edittext의 style 수정
+                        setBackgroundResource(R.drawable.background_text_input_error_focus)
                     }
-                    etInputSignInPassword.setText("")
-                    showToast("no_user_id")
-                    return@setOnClickListener
+                    showToast("no_password")
+                    return
                 }
             } else {
-                showToast("blank")
-                return@setOnClickListener
+                etInputSignInUserId.apply {
+                    setSelection(text.length)
+                    requestFocus()
+                }
+                etInputSignInPassword.setText("")
+                showToast("no_user_id")
+                return
             }
+        } else {
+            showToast("blank")
+            return
         }
     }
 
