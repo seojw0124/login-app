@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/iv_logo_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="40dp"
         android:contentDescription="@string/description_logo_image"
         android:src="@drawable/ic_logo"
@@ -22,19 +22,18 @@
 
     <TextView
         android:id="@+id/tv_sign_up_user_name_label"
+        style="@style/AppTextLabel.S14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/label_user_name"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_logo_image" />
 
     <EditText
         android:id="@+id/et_input_sign_up_user_name"
-        style="@style/AppEditText"
+        style="@style/AppEditText.S14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -47,23 +46,22 @@
 
     <TextView
         android:id="@+id/tv_sign_up_user_id_label"
+        style="@style/AppTextLabel.S14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="@string/label_user_id"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/et_input_sign_up_user_name"
         app:layout_constraintStart_toStartOf="@id/et_input_sign_up_user_name"
         app:layout_constraintTop_toBottomOf="@id/et_input_sign_up_user_name" />
 
     <EditText
         android:id="@+id/et_input_sign_up_user_id"
-        style="@style/AppEditText"
+        style="@style/AppEditText.S14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:hint="@string/hint_input_user_id"
+        android:hint="@string/hint_input_sign_up_user_id"
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="@id/tv_sign_up_user_id_label"
@@ -72,23 +70,22 @@
 
     <TextView
         android:id="@+id/tv_sign_up_password_label"
+        style="@style/AppTextLabel.S14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="@string/label_password"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/et_input_sign_up_user_id"
         app:layout_constraintStart_toStartOf="@id/et_input_sign_up_user_id"
         app:layout_constraintTop_toBottomOf="@id/et_input_sign_up_user_id" />
 
     <EditText
         android:id="@+id/et_input_sign_up_password"
-        style="@style/AppEditText"
+        style="@style/AppEditText.S14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:hint="@string/hint_input_password"
+        android:hint="@string/hint_input_sign_up_password"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@id/tv_sign_up_password_label"
@@ -97,19 +94,18 @@
 
     <TextView
         android:id="@+id/tv_sign_up_age_label"
+        style="@style/AppTextLabel.S14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="@string/label_age"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/et_input_sign_up_password"
         app:layout_constraintStart_toStartOf="@id/et_input_sign_up_password"
         app:layout_constraintTop_toBottomOf="@id/et_input_sign_up_password" />
 
     <EditText
         android:id="@+id/et_input_sign_up_age"
-        style="@style/AppEditText"
+        style="@style/AppEditText.S14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -122,19 +118,18 @@
 
     <TextView
         android:id="@+id/tv_sign_up_favorite_drink_label"
+        style="@style/AppTextLabel.S14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="@string/label_favorite_drink"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/et_input_sign_up_age"
         app:layout_constraintStart_toStartOf="@id/et_input_sign_up_age"
         app:layout_constraintTop_toBottomOf="@id/et_input_sign_up_age" />
 
     <EditText
         android:id="@+id/et_input_sign_up_favorite_drink"
-        style="@style/AppEditText"
+        style="@style/AppEditText.S14"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -150,7 +145,7 @@
         style="@style/AppButtonPrimary"
         android:layout_width="0dp"
         android:layout_height="52dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="40dp"
         android:text="@string/btn_label_sign_up"
         app:layout_constraintEnd_toEndOf="@id/et_input_sign_up_favorite_drink"
         app:layout_constraintStart_toStartOf="@id/et_input_sign_up_favorite_drink"

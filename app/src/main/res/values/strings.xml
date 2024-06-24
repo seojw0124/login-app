@@ -11,11 +11,13 @@
 
     <!--  SignUp  -->
     <string name="label_user_name">이름</string>
-    <string name="hint_input_user_name">이름을 입력하세요.</string>
+    <string name="hint_input_user_name">이름을 입력하세요 (ex. 홍길동)</string>
+    <string name="hint_input_sign_up_user_id">아이디를 입력하세요 (영문자, 숫자만)</string>
+    <string name="hint_input_sign_up_password">비밀번호를 입력하세요 (10자리 이상)</string>
     <string name="label_age">나이</string>
-    <string name="hint_input_age">나이를 입력하세요.</string>
+    <string name="hint_input_age">나이를 입력하세요 (ex. 25)</string>
     <string name="label_favorite_drink">최애 음료</string>
-    <string name="hint_input_favorite_drink">최애 음료를 입력하세요.</string>
+    <string name="hint_input_favorite_drink">최애 음료를 입력하세요 (ex. 아이스 아메리카노)</string>
 
     <!--  Home  -->
     <string name="description_home_image">홈 화면에서 랜덤으로 보여주는 커피 이미지</string>

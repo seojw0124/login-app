@@ -21,19 +21,18 @@
 
     <TextView
         android:id="@+id/tv_sign_in_user_id_label"
+        style="@style/AppTextLabel.S16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/label_user_id"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_logo_image" />
 
     <EditText
         android:id="@+id/et_input_sign_in_user_id"
-        style="@style/AppEditText"
+        style="@style/AppEditText.S16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -46,19 +45,18 @@
 
     <TextView
         android:id="@+id/tv_sign_in_password_label"
+        style="@style/AppTextLabel.S16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/label_password"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/et_input_sign_in_user_id"
         app:layout_constraintStart_toStartOf="@id/et_input_sign_in_user_id"
         app:layout_constraintTop_toBottomOf="@id/et_input_sign_in_user_id" />
 
     <EditText
         android:id="@+id/et_input_sign_in_password"
-        style="@style/AppEditText"
+        style="@style/AppEditText.S16"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
