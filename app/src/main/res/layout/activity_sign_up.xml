@@ -34,6 +34,7 @@
 
     <EditText
         android:id="@+id/et_input_sign_up_user_name"
+        style="@style/AppEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -58,6 +59,7 @@
 
     <EditText
         android:id="@+id/et_input_sign_up_user_id"
+        style="@style/AppEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -82,6 +84,7 @@
 
     <EditText
         android:id="@+id/et_input_sign_up_password"
+        style="@style/AppEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -106,6 +109,7 @@
 
     <EditText
         android:id="@+id/et_input_sign_up_age"
+        style="@style/AppEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -130,6 +134,7 @@
 
     <EditText
         android:id="@+id/et_input_sign_up_mbti"
+        style="@style/AppEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -140,11 +145,12 @@
         app:layout_constraintStart_toStartOf="@id/tv_sign_up_mbti_label"
         app:layout_constraintTop_toBottomOf="@id/tv_sign_up_mbti_label" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_sign_up"
+        style="@style/AppButtonPrimary"
         android:layout_width="0dp"
         android:layout_height="52dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="18dp"
         android:text="@string/btn_label_sign_up"
         app:layout_constraintEnd_toEndOf="@id/et_input_sign_up_mbti"
         app:layout_constraintStart_toStartOf="@id/et_input_sign_up_mbti"

@@ -33,6 +33,7 @@
 
     <EditText
         android:id="@+id/et_input_sign_in_user_id"
+        style="@style/AppEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -57,6 +58,7 @@
 
     <EditText
         android:id="@+id/et_input_sign_in_password"
+        style="@style/AppEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -69,6 +71,7 @@
 
     <Button
         android:id="@+id/btn_sign_in"
+        style="@style/AppButtonPrimary"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginTop="64dp"
@@ -79,6 +82,7 @@
 
     <Button
         android:id="@+id/btn_go_to_sign_up"
+        style="@style/AppButtonPrimary"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginTop="12dp"

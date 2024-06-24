@@ -18,11 +18,14 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setLayout() {
-        val user = Storage.user
-        user?.let { showUserInfo(it) }
+        val userId = intent.getStringExtra("userId") ?: ""
+        val user = Storage.getUser(userId)
+        user?.let {
+            setUserInfo(it)
+        }
     }
 
-    private fun showUserInfo(user: UserInfo) {
+    private fun setUserInfo(user: UserInfo) {
         val tvHomeUserId = findViewById<TextView>(R.id.tv_home_user_id)
         val tvHomeUserName = findViewById<TextView>(R.id.tv_home_user_name)
         val tvHomeAge = findViewById<TextView>(R.id.tv_home_age)

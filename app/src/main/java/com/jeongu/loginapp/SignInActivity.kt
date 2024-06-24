@@ -46,8 +46,8 @@ class SignInActivity : AppCompatActivity() {
             // 둘 중 하나라도 입력되지 않았을 경우
             if (userId.isNotBlank() && password.isNotBlank()) { // isNotEmpty()는 공백이 있으면 true를 반환하지만 isNotBlank()는 공백이 있으면 false를 반환
                 showToast(true)
-                Log.d(TAG, "userId: $userId, password: $password")
                 val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("userId", userId)
                 startActivity(intent)
             } else {
                 showToast(false)

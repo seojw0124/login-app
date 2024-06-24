@@ -73,6 +73,7 @@
 
     <Button
         android:id="@+id/btn_close"
+        style="@style/AppButtonPrimary"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginBottom="40dp"

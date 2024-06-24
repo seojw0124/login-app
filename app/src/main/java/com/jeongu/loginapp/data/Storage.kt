@@ -2,8 +2,7 @@ package com.jeongu.loginapp.data
 
 object Storage {
 
-    var user: UserInfo? = null
-        private set
+    private var user: UserInfo? = null
 
     fun saveUser(user: UserInfo) {
         Storage.user = user
