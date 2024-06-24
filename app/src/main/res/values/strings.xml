@@ -14,14 +14,14 @@
     <string name="hint_input_user_name">이름을 입력하세요.</string>
     <string name="label_age">나이</string>
     <string name="hint_input_age">나이를 입력하세요.</string>
-    <string name="label_mbti">mbti</string>
-    <string name="hint_input_mbti">mbti를 입력하세요.</string>
+    <string name="label_favorite_drink">최애 음료</string>
+    <string name="hint_input_favorite_drink">최애 음료를 입력하세요.</string>
 
     <!--  Home  -->
     <string name="description_home_image">홈 화면에서 랜덤으로 보여주는 커피 이미지</string>
     <string name="text_home_user_id">아이디 : %s</string>
     <string name="text_home_user_name">이름 : %s</string>
     <string name="text_home_age">나이 : %s</string>
-    <string name="text_home_mbti">MBTI : %s</string>
+    <string name="text_home_favorite_drink">최애 음료 : %s</string>
     <string name="btn_label_close">종료</string>
 </resources>

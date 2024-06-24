@@ -51,12 +51,12 @@ class HomeActivity : AppCompatActivity() {
         val tvHomeUserId = findViewById<TextView>(R.id.tv_home_user_id)
         val tvHomeUserName = findViewById<TextView>(R.id.tv_home_user_name)
         val tvHomeAge = findViewById<TextView>(R.id.tv_home_age)
-        val tvHomeMbti = findViewById<TextView>(R.id.tv_home_mbti)
+        val tvHomeFavoriteDrink = findViewById<TextView>(R.id.tv_home_favorite_drink)
 
         tvHomeUserId.text = String.format(resources.getString(R.string.text_home_user_id), user.userId)
         tvHomeUserName.text = String.format(resources.getString(R.string.text_home_user_name), user.userName)
         tvHomeAge.text = String.format(resources.getString(R.string.text_home_age), user.age.toString())
-        tvHomeMbti.text = String.format(resources.getString(R.string.text_home_mbti), user.mbti)
+        tvHomeFavoriteDrink.text = String.format(resources.getString(R.string.text_home_favorite_drink), user.favoriteDrink)
     }
 
     private fun navigateToSignIn() {

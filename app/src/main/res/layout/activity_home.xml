@@ -59,7 +59,7 @@
         tools:text="나이: 25" />
 
     <TextView
-        android:id="@+id/tv_home_mbti"
+        android:id="@+id/tv_home_favorite_drink"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -69,7 +69,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_home_age"
-        tools:text="MBTI: ISTP" />
+        tools:text="최애음료: 아이스 아메리카노" />
 
     <Button
         android:id="@+id/btn_close"

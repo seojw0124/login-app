@@ -2,6 +2,7 @@ package com.jeongu.loginapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -12,6 +13,7 @@ import com.jeongu.loginapp.data.Storage
 import com.jeongu.loginapp.data.UserInfo
 
 private const val PASSWORD_FORMAT_LENGTH = 10
+private const val AGE_FORMAT_LENGTH = 3
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -21,12 +23,12 @@ class SignUpActivity : AppCompatActivity() {
     private var userId = ""
     private var password = ""
     private var age = 0
-    private var mbti = ""
+    private var favoriteDrink = ""
     private var isValidUserName = false
     private var isValidUserId = false
     private var isValidPassword = false
     private var isValidAge = false
-    private var isValidMbti = false
+    private var isValidFavoriteDrink = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +43,19 @@ class SignUpActivity : AppCompatActivity() {
         val etInputUserId = findViewById<EditText>(R.id.et_input_sign_up_user_id)
         val etInputPassword = findViewById<EditText>(R.id.et_input_sign_up_password)
         val etInputAge = findViewById<EditText>(R.id.et_input_sign_up_age)
-        val etInputMbti = findViewById<EditText>(R.id.et_input_sign_up_mbti)
+        val etInputFavoriteDrink = findViewById<EditText>(R.id.et_input_sign_up_favorite_drink)
+
+        setMaxLength(etInputAge)
 
         checkValidInput(etInputUserName)
         checkValidInput(etInputUserId)
         checkValidInput(etInputPassword)
         checkValidInput(etInputAge)
-        checkValidInput(etInputMbti)
+        checkValidInput(etInputFavoriteDrink)
+    }
+
+    private fun setMaxLength(editText: EditText) {
+        editText.filters = arrayOf(InputFilter.LengthFilter(AGE_FORMAT_LENGTH))
     }
 
     // 입력값이 유효한지 확인하는 함수
@@ -58,7 +66,6 @@ class SignUpActivity : AppCompatActivity() {
                 R.id.et_input_sign_up_user_name -> {
                     userName = inputValue
                     isValidUserName = isValidInput(userName)
-                    Log.d(TAG, "userName: $userName")
                 }
                 R.id.et_input_sign_up_user_id -> {
                     userId = inputValue
@@ -72,9 +79,9 @@ class SignUpActivity : AppCompatActivity() {
                     age = inputValue.toInt()
                     isValidAge = isValidInput(age.toString())
                 }
-                R.id.et_input_sign_up_mbti -> {
-                    mbti = inputValue
-                    isValidMbti = isValidInput(mbti)
+                R.id.et_input_sign_up_favorite_drink -> {
+                    favoriteDrink = inputValue
+                    isValidFavoriteDrink = isValidInput(favoriteDrink)
                 }
             }
         }
@@ -96,7 +103,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun signUp() {
         val btnSignUp = findViewById<Button>(R.id.btn_sign_up)
         btnSignUp.setOnClickListener {
-            if (isValidUserName && isValidUserId && isValidPassword && isValidAge && isValidMbti) {
+            if (isValidUserName && isValidUserId && isValidPassword && isValidAge && isValidFavoriteDrink) {
                 successSignUp()
             } else {
                 when {
@@ -104,7 +111,7 @@ class SignUpActivity : AppCompatActivity() {
                     !isValidUserId -> Log.d(TAG, "isValidUserId: $userId")
                     !isValidPassword -> Log.d(TAG, "isValidPassword: $password")
                     !isValidAge -> Log.d(TAG, "isValidAge: $age")
-                    !isValidMbti -> Log.d(TAG, "isValidMbti: $mbti")
+                    !isValidFavoriteDrink -> Log.d(TAG, "isValidFavoriteDrink: $favoriteDrink")
                 }
 
                 showToast(false)
@@ -114,7 +121,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun successSignUp() {
-        val user = UserInfo(userName, userId, password, age, mbti)
+        val user = UserInfo(userName, userId, password, age, favoriteDrink)
         Storage.saveUser(user)
         val intent = Intent(this, SignInActivity::class.java)
         intent.apply {

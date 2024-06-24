@@ -5,5 +5,5 @@ data class UserInfo(
     val userId: String,
     val password: String,
     val age: Int,
-    val mbti: String
+    val favoriteDrink: String
 )
