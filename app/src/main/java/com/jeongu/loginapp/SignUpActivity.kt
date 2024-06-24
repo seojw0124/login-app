@@ -19,6 +19,12 @@ class SignUpActivity : AppCompatActivity() {
 
     private val TAG = "SignUpActivity"
 
+    private val etInputUserName by lazy { findViewById<EditText>(R.id.et_input_sign_up_user_name) }
+    private val etInputUserId by lazy { findViewById<EditText>(R.id.et_input_sign_up_user_id) }
+    private val etInputPassword by lazy { findViewById<EditText>(R.id.et_input_sign_up_password) }
+    private val etInputAge by lazy { findViewById<EditText>(R.id.et_input_sign_up_age) }
+    private val etInputFavoriteDrink by lazy { findViewById<EditText>(R.id.et_input_sign_up_favorite_drink) }
+
     private var userName = ""
     private var userId = ""
     private var password = ""
@@ -33,18 +39,11 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-
         setTextInput()
         signUp()
     }
 
     private fun setTextInput() {
-        val etInputUserName = findViewById<EditText>(R.id.et_input_sign_up_user_name)
-        val etInputUserId = findViewById<EditText>(R.id.et_input_sign_up_user_id)
-        val etInputPassword = findViewById<EditText>(R.id.et_input_sign_up_password)
-        val etInputAge = findViewById<EditText>(R.id.et_input_sign_up_age)
-        val etInputFavoriteDrink = findViewById<EditText>(R.id.et_input_sign_up_favorite_drink)
-
         setMaxLength(etInputAge)
 
         checkValidInput(etInputUserName)
@@ -62,24 +61,24 @@ class SignUpActivity : AppCompatActivity() {
     private fun checkValidInput(editText: EditText) {
         editText.doAfterTextChanged {
             val inputValue = it?.toString() ?: ""
-            when (editText.id) {
-                R.id.et_input_sign_up_user_name -> {
+            when (editText) {
+                etInputUserName -> {
                     userName = inputValue
                     isValidUserName = isValidInput(userName)
                 }
-                R.id.et_input_sign_up_user_id -> {
+                etInputUserId -> {
                     userId = inputValue
                     isValidUserId = isValidUserId(userId)
                 }
-                R.id.et_input_sign_up_password -> {
+                etInputPassword -> {
                     password = inputValue
                     isValidPassword = isValidPassword(password)
                 }
-                R.id.et_input_sign_up_age -> {
+                etInputAge -> {
                     age = inputValue.toInt()
                     isValidAge = isValidInput(age.toString())
                 }
-                R.id.et_input_sign_up_favorite_drink -> {
+                etInputFavoriteDrink -> {
                     favoriteDrink = inputValue
                     isValidFavoriteDrink = isValidInput(favoriteDrink)
                 }
@@ -113,7 +112,6 @@ class SignUpActivity : AppCompatActivity() {
                     !isValidAge -> Log.d(TAG, "isValidAge: $age")
                     !isValidFavoriteDrink -> Log.d(TAG, "isValidFavoriteDrink: $favoriteDrink")
                 }
-
                 showToast(false)
                 return@setOnClickListener
             }
@@ -129,7 +127,6 @@ class SignUpActivity : AppCompatActivity() {
             putExtra("password", user.password)
         }
         setResult(RESULT_OK, intent)
-        Log.d(TAG, "signUp: $intent")
         showToast(true)
         finish()
     }

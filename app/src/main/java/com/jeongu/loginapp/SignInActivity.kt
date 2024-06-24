@@ -69,6 +69,11 @@ class SignInActivity : AppCompatActivity() {
                         return@setOnClickListener
                     }
                 } else {
+                    etInputSignInUserId.apply {
+                        setText("")
+                        requestFocus()
+                    }
+                    etInputSignInPassword.setText("")
                     showToast("no_user_id")
                     return@setOnClickListener
                 }
