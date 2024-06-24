@@ -9,11 +9,19 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.jeongu.loginapp.data.Storage
 
 class SignInActivity : AppCompatActivity() {
 
     private val TAG = "SignInActivity"
     private lateinit var signUpResult: ActivityResultLauncher<Intent>
+
+    private val etInputSignInUserId by lazy {
+        findViewById<EditText>(R.id.et_input_sign_in_user_id)
+    }
+    private val etInputSignInPassword by lazy {
+        findViewById<EditText>(R.id.et_input_sign_in_password)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +37,8 @@ class SignInActivity : AppCompatActivity() {
             if (it.resultCode == RESULT_OK) {
                 val userIdData = it.data?.getStringExtra("userId") ?: ""
                 val passwordData = it.data?.getStringExtra("password") ?: ""
-                val etInputSignInUserId = findViewById<EditText>(R.id.et_input_sign_in_user_id)
-                val etInputSignInPassword = findViewById<EditText>(R.id.et_input_sign_in_password)
+                //val etInputSignInUserId = findViewById<EditText>(R.id.et_input_sign_in_user_id)
+                //val etInputSignInPassword = findViewById<EditText>(R.id.et_input_sign_in_password)
 
                 etInputSignInUserId.setText(userIdData)
                 etInputSignInPassword.setText(passwordData)
@@ -41,16 +49,31 @@ class SignInActivity : AppCompatActivity() {
     private fun signIn() {
         val btnSignIn = findViewById<Button>(R.id.btn_sign_in)
         btnSignIn.setOnClickListener {
-            val userId = findViewById<EditText>(R.id.et_input_sign_in_user_id).text.toString()
-            val password = findViewById<EditText>(R.id.et_input_sign_in_password).text.toString()
+            val userId = etInputSignInUserId.text.toString()
+            val password = etInputSignInPassword.text.toString()
             // 둘 중 하나라도 입력되지 않았을 경우
-            if (userId.isNotBlank() && password.isNotBlank()) { // isNotEmpty()는 공백이 있으면 true를 반환하지만 isNotBlank()는 공백이 있으면 false를 반환
-                showToast(true)
-                val intent = Intent(this, HomeActivity::class.java)
-                intent.putExtra("userId", userId)
-                startActivity(intent)
+            if (userId.isNotBlank() && password.isNotBlank()) { // isNotEmpty()는 공백이 있으면 true를 반환하지만 isNotBlank()는 공백이 있어도 false를 반환
+                val user = Storage.getUser(userId)
+                if (user != null) {
+                    if (user.password == password) {
+                        showToast("success")
+                        val intent = Intent(this, HomeActivity::class.java)
+                        intent.putExtra("userId", userId)
+                        startActivity(intent)
+                    } else {
+                        etInputSignInPassword.apply {
+                            setText("") // vs getText().clear() -> text.clear()는 API 28부터 사용 가능
+                            requestFocus()
+                        }
+                        showToast("no_password")
+                        return@setOnClickListener
+                    }
+                } else {
+                    showToast("no_user_id")
+                    return@setOnClickListener
+                }
             } else {
-                showToast(false)
+                showToast("blank")
                 return@setOnClickListener
             }
         }
@@ -64,11 +87,20 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    private fun showToast(isSuccessful: Boolean) {
-        if (isSuccessful) {
-            Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "아이디/비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
+    private fun showToast(type: String) {
+        when (type) {
+            "success" -> {
+                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+            }
+            "no_user_id" -> {
+                Toast.makeText(this, "아이디가 존재하지 않습니다", Toast.LENGTH_SHORT).show()
+            }
+            "no_password" -> {
+                Toast.makeText(this, "비밀번호가 올바르지 않습니다", Toast.LENGTH_SHORT).show()
+            }
+            "blank" -> {
+                Toast.makeText(this, "아이디와 비밀번호를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
