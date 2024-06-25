@@ -26,7 +26,6 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
         setLayout()
         navigateToSignIn()
     }
@@ -34,13 +33,11 @@ class HomeActivity : AppCompatActivity() {
     private fun setLayout() {
         setRandomImage()
 
-        // userInfo 가져오기
         val user = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra("user", UserInfo::class.java)
         } else {
             intent.getParcelableExtra("user")
         }
-
         user?.let {
             setUserInfo(it)
         }

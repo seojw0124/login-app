@@ -32,8 +32,6 @@ class SignInActivity : AppCompatActivity() {
             if (it.resultCode == RESULT_OK) {
                 val userIdData = it.data?.getStringExtra("userId") ?: ""
                 val passwordData = it.data?.getStringExtra("password") ?: ""
-                //val etInputSignInUserId = findViewById<EditText>(R.id.et_input_sign_in_user_id)
-                //val etInputSignInPassword = findViewById<EditText>(R.id.et_input_sign_in_password)
 
                 etInputSignInUserId.setText(userIdData)
                 etInputSignInPassword.setText(passwordData)
@@ -64,7 +62,6 @@ class SignInActivity : AppCompatActivity() {
                     etInputSignInPassword.apply {
                         setText("") // vs getText().clear() -> text.clear()는 API 28부터 사용 가능
                         requestFocus()
-                        // edittext의 style 수정
                         setBackgroundResource(R.drawable.background_text_input_error_focus)
                     }
                     showToast("no_password")
