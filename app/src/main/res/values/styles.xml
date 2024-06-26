@@ -18,7 +18,7 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="AppButtonPrimary">
+    <style name="AppButtonPrimary" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:background">@drawable/selector_button_background</item>
         <item name="android:textColor">@color/selector_button_text_color</item>
         <item name="android:textStyle">bold</item>
