@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.jeongu.loginapp.data.Storage
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.jeongu.loginapp.data.UserInfo
 import kotlin.random.Random
 
@@ -28,12 +28,14 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setLayout()
         navigateToSignIn()
+
+        SignOut()
     }
 
     private fun setLayout() {
         setRandomImage()
 
-        val user = if (Build.VERSION.SDK_INT >= 33) {
+        val user = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra("user", UserInfo::class.java)
         } else {
             intent.getParcelableExtra("user")
@@ -67,6 +69,13 @@ class HomeActivity : AppCompatActivity() {
     private fun navigateToSignIn() {
         val btnClose = findViewById<Button>(R.id.btn_close)
         btnClose.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun SignOut() {
+        val layoutBtnClose = findViewById<ConstraintLayout>(R.id.layout_btn_close)
+        layoutBtnClose.setOnClickListener {
             finish()
         }
     }

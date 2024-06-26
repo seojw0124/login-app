@@ -26,4 +26,5 @@
     <string name="text_home_age">나이 : %s</string>
     <string name="text_home_favorite_drink">최애 음료 : %s</string>
     <string name="btn_label_close">종료</string>
+    <string name="description_button_image">버튼 아이콘</string>
 </resources>

@@ -9,5 +9,6 @@
     <color name="gray_700">#474F5A</color>
     <color name="gray_800">#3D4A5C</color>
     <color name="green_500">#00704a</color>
+    <color name="yellow_500">#FAE100</color>
     <color name="red_500">#EA4335</color>
 </resources>

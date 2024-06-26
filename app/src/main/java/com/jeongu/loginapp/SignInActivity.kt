@@ -92,18 +92,10 @@ class SignInActivity : AppCompatActivity() {
 
     private fun showToast(type: String) {
         when (type) {
-            "success" -> {
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-            }
-            "no_user_id" -> {
-                Toast.makeText(this, "아이디가 존재하지 않습니다", Toast.LENGTH_SHORT).show()
-            }
-            "no_password" -> {
-                Toast.makeText(this, "비밀번호가 올바르지 않습니다", Toast.LENGTH_SHORT).show()
-            }
-            "blank" -> {
-                Toast.makeText(this, "아이디와 비밀번호를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
-            }
+            "success" -> Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+            "no_user_id" -> Toast.makeText(this, "아이디가 존재하지 않습니다", Toast.LENGTH_SHORT).show()
+            "no_password" -> Toast.makeText(this, "비밀번호가 올바르지 않습니다", Toast.LENGTH_SHORT).show()
+            "blank" -> Toast.makeText(this, "아이디와 비밀번호를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
         }
     }
 }
