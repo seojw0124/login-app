@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.jeongu.loginapp.data.Storage
+import com.jeongu.loginapp.data.UserInfo
 
 class SignInActivity : AppCompatActivity() {
 
@@ -21,6 +22,7 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+        initUserData()
         setTextInput()
         signIn()
         navigateToSignUp()
@@ -96,5 +98,10 @@ class SignInActivity : AppCompatActivity() {
             "no_password" -> Toast.makeText(this, "비밀번호가 올바르지 않습니다", Toast.LENGTH_SHORT).show()
             "blank" -> Toast.makeText(this, "아이디와 비밀번호를 모두 입력해주세요", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun initUserData() {
+        Storage.saveUser(UserInfo("aaaaa", "aaa123", "1234567", 28, "아메리카노"))
+        Storage.saveUser(UserInfo("bbbbb", "bbb123", "12345678", 29, "라떼"))
     }
 }
