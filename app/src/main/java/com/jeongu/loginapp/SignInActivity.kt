@@ -72,12 +72,17 @@ class SignInActivity : AppCompatActivity() {
                 etInputSignInUserId.apply {
                     setSelection(text.length)
                     requestFocus()
+                    setBackgroundResource(R.drawable.background_text_input_error_focus)
                 }
                 etInputSignInPassword.setText("")
                 showToast("no_user_id")
                 return
             }
         } else {
+            etInputSignInUserId.apply {
+                requestFocus()
+                setBackgroundResource(R.drawable.background_text_input_error_focus)
+            }
             showToast("blank")
             return
         }

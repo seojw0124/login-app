@@ -61,7 +61,6 @@ class SignUpActivity : AppCompatActivity() {
 
     // 입력값이 유효한지 확인하는 함수
     private fun checkValidSignUpInput(editText: EditText) {
-
         editText.setOnFocusChangeListener { _, isFocused ->
             if (isFocused) {
                 editText.setBackgroundResource(R.drawable.background_text_input_focus)
@@ -141,19 +140,8 @@ class SignUpActivity : AppCompatActivity() {
     private fun signUp() {
         val btnSignUp = findViewById<Button>(R.id.btn_sign_up)
         btnSignUp.setOnClickListener {
-            isExistUserName = Storage.isExistUserName(userName) // 이름 중복 확인
-
-            Log.d(TAG, "userName: $userName")
-
-            isExistUserId = Storage.isExistUser(userId) // 아이디 중복 확인
-
-            Log.d(TAG, "userId: $userId")
-
-            Log.d(TAG, "isExistUserName: $isExistUserName")
-            Log.d(TAG, "isExistUserId: $isExistUserId")
-
-            Log.d(TAG, "Storage.userList: ${Storage.userList}")
-
+            isExistUserName = Storage.isExistUserName(userName)
+            isExistUserId = Storage.isExistUser(userId)
             if (isValidUserName && isValidUserId && isValidPassword && isValidAge && isValidFavoriteDrink && !isExistUserName && !isExistUserId) {
                 successSignUp()
             } else {
@@ -232,8 +220,8 @@ class SignUpActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun showToast(isNotValidInput: String) {
-        when (isNotValidInput) {
+    private fun showToast(isNotValid: String) {
+        when (isNotValid) {
             "user_name" -> Toast.makeText(this, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
             "user_id" -> Toast.makeText(this, "아이디를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
             "password" -> Toast.makeText(this, "비밀번호를 다시 입력해주세요", Toast.LENGTH_SHORT).show()

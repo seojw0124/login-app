@@ -2,8 +2,7 @@ package com.jeongu.loginapp.data
 
 object Storage {
 
-    var userList = mutableListOf<UserInfo>()
-        private set
+    private var userList = mutableListOf<UserInfo>()
 
     fun saveUser(user: UserInfo) {
         userList.add(user)
