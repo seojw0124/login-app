@@ -61,7 +61,7 @@ class HomeActivity : AppCompatActivity() {
 
         tvHomeUserId.text = String.format(resources.getString(R.string.text_home_user_id), user.userId)
         tvHomeUserName.text = String.format(resources.getString(R.string.text_home_user_name), user.userName)
-        tvHomeAge.text = String.format(resources.getString(R.string.text_home_age), user.age.toString())
+        tvHomeAge.text = String.format(resources.getString(R.string.text_home_age), user.age)
         tvHomeFavoriteDrink.text = String.format(resources.getString(R.string.text_home_favorite_drink), user.favoriteDrink)
     }
 

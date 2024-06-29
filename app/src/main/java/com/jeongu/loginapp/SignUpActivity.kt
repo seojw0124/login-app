@@ -82,8 +82,8 @@ class SignUpActivity : AppCompatActivity() {
                     updateEditTextFocusState(editText)
                 }
                 etInputAge -> {
-                    age = inputValue.toInt()
-                    isValidAge = isValidInput(age.toString())
+                    age = if (inputValue.isNotBlank()) inputValue.toInt() else 0
+                    isValidAge = isValidAge(age.toString())
                     updateEditTextFocusState(editText)
                 }
                 etInputFavoriteDrink -> {
@@ -112,6 +112,10 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun isValidPassword(input: String): Boolean {
         return input.isNotBlank() && input.length >= PASSWORD_FORMAT_LENGTH
+    }
+
+    private fun isValidAge(input: String): Boolean {
+        return input.length >= AGE_FORMAT_LENGTH - 2 && input.toInt() in 1..120
     }
 
     private fun signUp() {
