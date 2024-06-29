@@ -27,8 +27,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setLayout()
-        navigateToSignIn()
-        SignOut()
+        signOut()
     }
 
     private fun setLayout() {
@@ -65,14 +64,7 @@ class HomeActivity : AppCompatActivity() {
         tvHomeFavoriteDrink.text = String.format(resources.getString(R.string.text_home_favorite_drink), user.favoriteDrink)
     }
 
-    private fun navigateToSignIn() {
-        val btnClose = findViewById<Button>(R.id.btn_close)
-        btnClose.setOnClickListener {
-            finish()
-        }
-    }
-
-    private fun SignOut() {
+    private fun signOut() {
         val layoutBtnClose = findViewById<ConstraintLayout>(R.id.layout_btn_close)
         layoutBtnClose.setOnClickListener {
             finish()

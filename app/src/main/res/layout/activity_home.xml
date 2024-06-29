@@ -71,17 +71,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_home_age"
         tools:text="최애음료: 아이스 아메리카노" />
 
-    <Button
-        android:id="@+id/btn_close"
-        style="@style/AppButtonPrimary"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/btn_label_close"
-        app:layout_constraintBottom_toTopOf="@id/layout_btn_close"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_btn_close"
         android:layout_width="0dp"
