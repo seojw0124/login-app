@@ -39,6 +39,8 @@ class SignUpActivity : AppCompatActivity() {
     private var isExistUserName = false
     private var isExistUserId = false
 
+    private var isSignUpError = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -61,66 +63,41 @@ class SignUpActivity : AppCompatActivity() {
 
     // 입력값이 유효한지 확인하는 함수
     private fun checkValidSignUpInput(editText: EditText) {
-        editText.setOnFocusChangeListener { _, isFocused ->
-            if (isFocused) {
-                editText.setBackgroundResource(R.drawable.background_text_input_focus)
-                editText.doAfterTextChanged {
-                    val inputValue = it?.toString() ?: ""
-                    when (editText) {
-                        etInputUserName -> {
-                            userName = inputValue
-                            isValidUserName = isValidInput(userName)
-                            updateEditTextFocusState("user_name")
-                        }
-                        etInputUserId -> {
-                            userId = inputValue
-                            isValidUserId = isValidUserId(userId)
-                            updateEditTextFocusState("user_id")
-                        }
-                        etInputPassword -> {
-                            password = inputValue
-                            isValidPassword = isValidPassword(password)
-                            updateEditTextFocusState("password")
-                        }
-                        etInputAge -> {
-                            age = inputValue.toInt()
-                            isValidAge = isValidInput(age.toString())
-                        }
-                        etInputFavoriteDrink -> {
-                            favoriteDrink = inputValue
-                            isValidFavoriteDrink = isValidInput(favoriteDrink)
-                        }
-                    }
+        editText.doAfterTextChanged {
+            val inputValue = it?.toString() ?: ""
+            when (editText) {
+                etInputUserName -> {
+                    userName = inputValue
+                    isValidUserName = isValidInput(userName)
+                    updateEditTextFocusState(editText)
                 }
-            } else {
-                editText.setBackgroundResource(R.drawable.background_text_input_normal)
+                etInputUserId -> {
+                    userId = inputValue
+                    isValidUserId = isValidUserId(userId)
+                    updateEditTextFocusState(editText)
+                }
+                etInputPassword -> {
+                    password = inputValue
+                    isValidPassword = isValidPassword(password)
+                    updateEditTextFocusState(editText)
+                }
+                etInputAge -> {
+                    age = inputValue.toInt()
+                    isValidAge = isValidInput(age.toString())
+                    updateEditTextFocusState(editText)
+                }
+                etInputFavoriteDrink -> {
+                    favoriteDrink = inputValue
+                    isValidFavoriteDrink = isValidInput(favoriteDrink)
+                    updateEditTextFocusState(editText)
+                }
             }
         }
     }
 
-    private fun updateEditTextFocusState(type: String) {
-        when (type) {
-            "user_name" -> {
-                if (isValidUserName) {
-                    etInputUserName.setBackgroundResource(R.drawable.background_text_input_focus)
-                } else {
-                    etInputUserName.setBackgroundResource(R.drawable.background_text_input_error_focus)
-                }
-            }
-            "user_id" -> {
-                if (isValidUserId) {
-                    etInputUserId.setBackgroundResource(R.drawable.background_text_input_focus)
-                } else {
-                    etInputUserId.setBackgroundResource(R.drawable.background_text_input_error_focus)
-                }
-            }
-            "password" -> {
-                if (isValidPassword) {
-                    etInputPassword.setBackgroundResource(R.drawable.background_text_input_focus)
-                } else {
-                    etInputPassword.setBackgroundResource(R.drawable.background_text_input_error_focus)
-                }
-            }
+    private fun updateEditTextFocusState(editText: EditText) {
+        if (isSignUpError) {
+            editText.setBackgroundResource(R.drawable.selector_text_input_background)
         }
     }
 
@@ -145,66 +122,66 @@ class SignUpActivity : AppCompatActivity() {
             if (isValidUserName && isValidUserId && isValidPassword && isValidAge && isValidFavoriteDrink && !isExistUserName && !isExistUserId) {
                 successSignUp()
             } else {
+                isSignUpError = true
                 val toastType = setErrorFocus()
-                toastType?.let { showToast(toastType) }
+                showToast(toastType)
                 return@setOnClickListener
             }
         }
     }
 
-    private fun setErrorFocus(): String? {
+    private fun setErrorFocus(): String {
         when {
             !isValidUserName -> {
                 etInputUserName.apply {
                     requestFocus()
-                    setBackgroundResource(R.drawable.background_text_input_error_focus)
+                    setBackgroundResource(R.drawable.selector_text_input_background_red)
                 }
                 return "user_name"
             }
             !isValidUserId -> {
                 etInputUserId.apply {
                     requestFocus()
-                    setBackgroundResource(R.drawable.background_text_input_error_focus)
+                    setBackgroundResource(R.drawable.selector_text_input_background_red)
                 }
                 return "user_id"
             }
             !isValidPassword -> {
                 etInputPassword.apply {
                     requestFocus()
-                    setBackgroundResource(R.drawable.background_text_input_error_focus)
+                    setBackgroundResource(R.drawable.selector_text_input_background_red)
                 }
                 return "password"
             }
             !isValidAge -> {
                 etInputAge.apply {
                     requestFocus()
-                    setBackgroundResource(R.drawable.background_text_input_error_focus)
+                    setBackgroundResource(R.drawable.selector_text_input_background_red)
                 }
                 return "age"
             }
             !isValidFavoriteDrink -> {
                 etInputFavoriteDrink.apply {
                     requestFocus()
-                    setBackgroundResource(R.drawable.background_text_input_error_focus)
+                    setBackgroundResource(R.drawable.selector_text_input_background_red)
                 }
                 return "favorite_drink"
             }
             isExistUserName -> {
                 etInputUserName.apply {
                     requestFocus()
-                    setBackgroundResource(R.drawable.background_text_input_error_focus)
+                    setBackgroundResource(R.drawable.selector_text_input_background_red)
                 }
                 return "exist_user_name"
             }
-            isExistUserId -> {
+            else -> {
                 etInputUserId.apply {
                     requestFocus()
-                    setBackgroundResource(R.drawable.background_text_input_error_focus)
+                    setBackgroundResource(R.drawable.selector_text_input_background_red)
                 }
                 return "exist_user_id"
             }
         }
-        return null
     }
 
     private fun successSignUp() {
