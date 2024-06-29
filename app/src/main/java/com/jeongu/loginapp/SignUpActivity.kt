@@ -3,7 +3,6 @@ package com.jeongu.loginapp
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputFilter
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -201,8 +200,8 @@ class SignUpActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun showToast(isNotValid: String) {
-        when (isNotValid) {
+    private fun showToast(type: String) {
+        when (type) {
             "user_name" -> Toast.makeText(this, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
             "user_id" -> Toast.makeText(this, "아이디를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
             "password" -> Toast.makeText(this, "비밀번호를 다시 입력해주세요", Toast.LENGTH_SHORT).show()

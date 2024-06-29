@@ -2,8 +2,6 @@ package com.jeongu.loginapp
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -49,7 +47,6 @@ class HomeActivity : AppCompatActivity() {
         val ivHomeCoffeeImage = findViewById<ImageView>(R.id.iv_home_image)
 
         ivHomeCoffeeImage.setImageResource(drinks[num] ?: R.drawable.ic_coffee_1)
-        Log.d(TAG, "random: $num")
     }
 
     private fun setUserInfo(user: UserInfo) {
