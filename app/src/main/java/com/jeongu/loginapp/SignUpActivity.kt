@@ -113,12 +113,6 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun failToSignUp() {
-        isSignUpError = true
-        val toastType = setError()
-        showToast(toastType)
-    }
-
     private fun isAllInputValid(): Boolean {
         return isValidUserName && isValidUserId && isValidPassword && isValidAge && isValidFavoriteDrink
     }
@@ -134,6 +128,12 @@ class SignUpActivity : AppCompatActivity() {
         setResult(RESULT_OK, intent)
         showToast("all_valid")
         finish()
+    }
+
+    private fun failToSignUp() {
+        isSignUpError = true
+        val toastType = setError()
+        showToast(toastType)
     }
 
     private fun setError(): String {
@@ -162,10 +162,11 @@ class SignUpActivity : AppCompatActivity() {
                 setEditTextErrorFocus(etInputUserName)
                 return "exist_user_name"
             }
-            else -> {
+            isExistUserId -> {
                 setEditTextErrorFocus(etInputUserId)
                 return "exist_user_id"
             }
+            else -> return "unknown"
         }
     }
 
