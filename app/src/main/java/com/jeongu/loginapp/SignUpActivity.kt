@@ -114,7 +114,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun isValidAge(input: String): Boolean {
-        return input.length >= AGE_FORMAT_LENGTH - 2 && input.toInt() in 1..120
+        return input.isNotBlank() && input.toInt() in 1..120
     }
 
     private fun signUp() {
@@ -137,50 +137,50 @@ class SignUpActivity : AppCompatActivity() {
         when {
             !isValidUserName -> {
                 etInputUserName.apply {
-                    requestFocus()
                     setBackgroundResource(R.drawable.selector_text_input_background_red)
+                    requestFocus()
                 }
                 return "user_name"
             }
             !isValidUserId -> {
                 etInputUserId.apply {
-                    requestFocus()
                     setBackgroundResource(R.drawable.selector_text_input_background_red)
+                    requestFocus()
                 }
                 return "user_id"
             }
             !isValidPassword -> {
                 etInputPassword.apply {
-                    requestFocus()
                     setBackgroundResource(R.drawable.selector_text_input_background_red)
+                    requestFocus()
                 }
                 return "password"
             }
             !isValidAge -> {
                 etInputAge.apply {
-                    requestFocus()
                     setBackgroundResource(R.drawable.selector_text_input_background_red)
+                    requestFocus()
                 }
                 return "age"
             }
             !isValidFavoriteDrink -> {
                 etInputFavoriteDrink.apply {
-                    requestFocus()
                     setBackgroundResource(R.drawable.selector_text_input_background_red)
+                    requestFocus()
                 }
                 return "favorite_drink"
             }
             isExistUserName -> {
                 etInputUserName.apply {
-                    requestFocus()
                     setBackgroundResource(R.drawable.selector_text_input_background_red)
+                    requestFocus()
                 }
                 return "exist_user_name"
             }
             else -> {
                 etInputUserId.apply {
-                    requestFocus()
                     setBackgroundResource(R.drawable.selector_text_input_background_red)
+                    requestFocus()
                 }
                 return "exist_user_id"
             }

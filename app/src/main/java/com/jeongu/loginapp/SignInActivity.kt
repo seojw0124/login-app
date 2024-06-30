@@ -61,27 +61,26 @@ class SignInActivity : AppCompatActivity() {
                     startActivity(intent)
                 } else {
                     etInputSignInPassword.apply {
-                        setText("") // vs getText().clear() -> text.clear()는 API 28부터 사용 가능
+                        setBackgroundResource(R.drawable.selector_text_input_background_red)
                         requestFocus()
-                        setBackgroundResource(R.drawable.background_text_input_error_focus)
                     }
                     showToast("no_password")
                     return
                 }
             } else {
                 etInputSignInUserId.apply {
+                    setBackgroundResource(R.drawable.selector_text_input_background_red)
                     setSelection(text.length)
                     requestFocus()
-                    setBackgroundResource(R.drawable.background_text_input_error_focus)
                 }
-                etInputSignInPassword.setText("")
+                etInputSignInPassword.setText("") // vs getText().clear() -> text.clear()는 API 28부터 사용 가능
                 showToast("no_user_id")
                 return
             }
         } else {
             etInputSignInUserId.apply {
                 requestFocus()
-                setBackgroundResource(R.drawable.background_text_input_error_focus)
+                setBackgroundResource(R.drawable.selector_text_input_background_red)
             }
             showToast("blank")
             return
