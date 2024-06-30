@@ -9,6 +9,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.jeongu.loginapp.data.UserInfo
 import kotlin.random.Random
 
+private const val RANDOM_IMAGE_COUNT = 5
+
 class HomeActivity : AppCompatActivity() {
 
     private val TAG = "HomeActivity"
@@ -43,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setRandomImage() {
         val random = Random
-        val num = random.nextInt(5) + 1
+        val num = random.nextInt(RANDOM_IMAGE_COUNT) + 1
         val ivHomeCoffeeImage = findViewById<ImageView>(R.id.iv_home_image)
 
         ivHomeCoffeeImage.setImageResource(drinks[num] ?: R.drawable.ic_coffee_1)
