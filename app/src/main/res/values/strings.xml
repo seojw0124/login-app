@@ -21,10 +21,10 @@
 
     <!--  Home  -->
     <string name="description_home_image">홈 화면에서 랜덤으로 보여주는 커피 이미지</string>
-    <string name="text_home_user_id">아이디 : %s</string>
-    <string name="text_home_user_name">이름 : %s</string>
-    <string name="text_home_age">나이 : %d</string>
-    <string name="text_home_favorite_drink">최애 음료 : %s</string>
+    <string name="format_home_user_id">아이디 : %s</string>
+    <string name="format_home_user_name">이름 : %s</string>
+    <string name="format_home_age">나이 : %d</string>
+    <string name="format_home_favorite_drink">최애 음료 : %s</string>
     <string name="btn_label_close">종료</string>
     <string name="description_button_image">버튼 아이콘</string>
 </resources>

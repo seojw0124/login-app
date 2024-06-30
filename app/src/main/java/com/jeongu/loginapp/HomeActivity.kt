@@ -55,10 +55,10 @@ class HomeActivity : AppCompatActivity() {
         val tvHomeAge = findViewById<TextView>(R.id.tv_home_age)
         val tvHomeFavoriteDrink = findViewById<TextView>(R.id.tv_home_favorite_drink)
 
-        tvHomeUserId.text = String.format(resources.getString(R.string.text_home_user_id), user.userId)
-        tvHomeUserName.text = String.format(resources.getString(R.string.text_home_user_name), user.userName)
-        tvHomeAge.text = String.format(resources.getString(R.string.text_home_age), user.age)
-        tvHomeFavoriteDrink.text = String.format(resources.getString(R.string.text_home_favorite_drink), user.favoriteDrink)
+        tvHomeUserId.text = getString(R.string.format_home_user_id, user.userId)
+        tvHomeUserName.text = getString(R.string.format_home_user_name, user.userName)
+        tvHomeAge.text = getString(R.string.format_home_age, user.age)
+        tvHomeFavoriteDrink.text = getString(R.string.format_home_favorite_drink, user.favoriteDrink)
     }
 
     private fun signOut() {

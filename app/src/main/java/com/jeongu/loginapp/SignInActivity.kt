@@ -79,8 +79,8 @@ class SignInActivity : AppCompatActivity() {
             }
         } else {
             etInputSignInUserId.apply {
-                requestFocus()
                 setBackgroundResource(R.drawable.selector_text_input_background_red)
+                requestFocus()
             }
             showToast("blank")
             return
