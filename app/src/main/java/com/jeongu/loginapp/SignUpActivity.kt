@@ -12,7 +12,6 @@ import com.jeongu.loginapp.data.Storage
 import com.jeongu.loginapp.data.UserInfo
 import com.jeongu.loginapp.validation.SignUpChecker
 
-//private const val PASSWORD_FORMAT_LENGTH = 7
 private const val AGE_FORMAT_LENGTH = 3
 
 class SignUpActivity : AppCompatActivity() {
@@ -53,11 +52,11 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun setTextInput() {
         setMaxLength(etInputAge)
-        checkValidSignUpInput(etInputUserName)
-        checkValidSignUpInput(etInputUserId)
-        checkValidSignUpInput(etInputPassword)
-        checkValidSignUpInput(etInputAge)
-        checkValidSignUpInput(etInputFavoriteDrink)
+        checkValidInput(etInputUserName)
+        checkValidInput(etInputUserId)
+        checkValidInput(etInputPassword)
+        checkValidInput(etInputAge)
+        checkValidInput(etInputFavoriteDrink)
     }
 
     private fun setMaxLength(editText: EditText) {
@@ -65,43 +64,39 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     // 입력값이 유효한지 확인하는 함수
-    private fun checkValidSignUpInput(editText: EditText) {
+    private fun checkValidInput(editText: EditText) {
         editText.doAfterTextChanged {
             val inputValue = it?.toString() ?: ""
             when (editText) {
                 etInputUserName -> {
                     userName = inputValue
                     isValidUserName = signUpChecker.isValidInput(userName)
-                    updateEditTextFocusState(editText)
                 }
                 etInputUserId -> {
                     userId = inputValue
                     isValidUserId = signUpChecker.isValidUserId(userId)
-                    updateEditTextFocusState(editText)
                 }
                 etInputPassword -> {
                     password = inputValue
                     isValidPassword = signUpChecker.isValidPassword(password)
-                    updateEditTextFocusState(editText)
                 }
                 etInputAge -> {
+                    // 입력 값이 없을 경우 0으로 초기화 해주지 않으면 입력값 없을 때 위에서 inputValue가 "".toInt()로 에러 발생
                     age = if (inputValue.isNotBlank()) inputValue.toInt() else 0
                     isValidAge = signUpChecker.isValidAge(age.toString())
-                    updateEditTextFocusState(editText)
                 }
                 etInputFavoriteDrink -> {
                     favoriteDrink = inputValue
                     isValidFavoriteDrink = signUpChecker.isValidInput(favoriteDrink)
-                    updateEditTextFocusState(editText)
                 }
             }
+            if(isSignUpError) updateEditTextFocusState(editText)
         }
     }
 
+    // 회원가입 실패 시 변경되었던 EditText의 스타일을 원래대로 돌려주는 함수
     private fun updateEditTextFocusState(editText: EditText) {
-        if (isSignUpError) {
-            editText.setBackgroundResource(R.drawable.selector_text_input_background)
-        }
+        editText.setBackgroundResource(R.drawable.selector_text_input_background)
     }
 
     private fun signUp() {
@@ -109,18 +104,26 @@ class SignUpActivity : AppCompatActivity() {
         btnSignUp.setOnClickListener {
             isExistUserName = Storage.isExistUserName(userName)
             isExistUserId = Storage.isExistUser(userId)
-            if (isValidUserName && isValidUserId && isValidPassword && isValidAge && isValidFavoriteDrink && !isExistUserName && !isExistUserId) {
-                successSignUp()
+            if (isAllInputValid() && !isExistUserName && !isExistUserId) {
+                succeedSignUp()
             } else {
-                isSignUpError = true
-                val toastType = setErrorFocus()
-                showToast(toastType)
+                failToSignUp()
                 return@setOnClickListener
             }
         }
     }
 
-    private fun successSignUp() {
+    private fun failToSignUp() {
+        isSignUpError = true
+        val toastType = setError()
+        showToast(toastType)
+    }
+
+    private fun isAllInputValid(): Boolean {
+        return isValidUserName && isValidUserId && isValidPassword && isValidAge && isValidFavoriteDrink
+    }
+
+    private fun succeedSignUp() {
         val user = UserInfo(userName, userId, password, age, favoriteDrink)
         Storage.saveUser(user)
         val intent = Intent(this, SignInActivity::class.java)
@@ -133,70 +136,58 @@ class SignUpActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun setErrorFocus(): String {
+    private fun setError(): String {
         when {
             !isValidUserName -> {
-                etInputUserName.apply {
-                    setBackgroundResource(R.drawable.selector_text_input_background_red)
-                    requestFocus()
-                }
+                setEditTextErrorFocus(etInputUserName)
                 return "user_name"
             }
             !isValidUserId -> {
-                etInputUserId.apply {
-                    setBackgroundResource(R.drawable.selector_text_input_background_red)
-                    requestFocus()
-                }
+                setEditTextErrorFocus(etInputUserId)
                 return "user_id"
             }
             !isValidPassword -> {
-                etInputPassword.apply {
-                    setBackgroundResource(R.drawable.selector_text_input_background_red)
-                    requestFocus()
-                }
+                setEditTextErrorFocus(etInputPassword)
                 return "password"
             }
             !isValidAge -> {
-                etInputAge.apply {
-                    setBackgroundResource(R.drawable.selector_text_input_background_red)
-                    requestFocus()
-                }
+                setEditTextErrorFocus(etInputAge)
                 return "age"
             }
             !isValidFavoriteDrink -> {
-                etInputFavoriteDrink.apply {
-                    setBackgroundResource(R.drawable.selector_text_input_background_red)
-                    requestFocus()
-                }
+                setEditTextErrorFocus(etInputFavoriteDrink)
                 return "favorite_drink"
             }
             isExistUserName -> {
-                etInputUserName.apply {
-                    setBackgroundResource(R.drawable.selector_text_input_background_red)
-                    requestFocus()
-                }
+                setEditTextErrorFocus(etInputUserName)
                 return "exist_user_name"
             }
             else -> {
-                etInputUserId.apply {
-                    setBackgroundResource(R.drawable.selector_text_input_background_red)
-                    requestFocus()
-                }
+                setEditTextErrorFocus(etInputUserId)
                 return "exist_user_id"
             }
         }
     }
 
-    private fun showToast(type: String) {
-        when (type) {
-            "user_name" -> Toast.makeText(this, "이름을 다시 입력해주세요", Toast.LENGTH_SHORT).show()
-            "user_id" -> Toast.makeText(this, "아이디를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
-            "password" -> Toast.makeText(this, "비밀번호를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
-            "age" -> Toast.makeText(this, "나이를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
-            "favorite_drink" -> Toast.makeText(this, "최애 음료를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
-            "exist_user_name" -> Toast.makeText(this, "이미 존재하는 이름입니다", Toast.LENGTH_SHORT).show()
-            "exist_user_id" -> Toast.makeText(this, "이미 존재하는 아이디입니다", Toast.LENGTH_SHORT).show()
-            "all_valid" -> Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+    private fun setEditTextErrorFocus(editText: EditText) {
+        editText.apply {
+            setBackgroundResource(R.drawable.selector_text_input_background_red)
+            requestFocus()
         }
+    }
+
+    private fun showToast(type: String) {
+        val message = when (type) {
+            "user_name" -> "이름을 다시 입력해주세요"
+            "user_id" -> "아이디를 다시 입력해주세요"
+            "password" -> "비밀번호를 다시 입력해주세요"
+            "age" -> "나이를 다시 입력해주세요"
+            "favorite_drink" -> "최애 음료를 다시 입력해주세요"
+            "exist_user_name" -> "이미 존재하는 이름입니다"
+            "exist_user_id" -> "이미 존재하는 아이디입니다"
+            "all_valid" -> "회원가입 성공"
+            else -> "unknown"
+        }
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
