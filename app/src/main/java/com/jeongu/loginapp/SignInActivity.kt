@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.jeongu.loginapp.data.Storage
 import com.jeongu.loginapp.data.UserInfo
 
+const val EXTRA_USER = "user"
+
 class SignInActivity : AppCompatActivity() {
 
     private val TAG = "SignInActivity"
@@ -31,8 +33,8 @@ class SignInActivity : AppCompatActivity() {
     private fun setLayout() {
         signUpResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
-                val userIdData = it.data?.getStringExtra("userId") ?: ""
-                val passwordData = it.data?.getStringExtra("password") ?: ""
+                val userIdData = it.data?.getStringExtra(EXTRA_USER_ID) ?: ""
+                val passwordData = it.data?.getStringExtra(EXTRA_PASSWORD) ?: ""
 
                 etInputSignInUserId.apply {
                     setText(userIdData)
@@ -74,7 +76,7 @@ class SignInActivity : AppCompatActivity() {
     private fun succeedSignIn(user: UserInfo?) {
         showToast("success")
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("user", user)
+        intent.putExtra(EXTRA_USER, user)
         startActivity(intent)
     }
 

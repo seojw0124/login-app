@@ -13,6 +13,8 @@ import com.jeongu.loginapp.data.UserInfo
 import com.jeongu.loginapp.validation.SignUpChecker
 
 private const val AGE_FORMAT_LENGTH = 3
+const val EXTRA_USER_ID = "userId"
+const val EXTRA_PASSWORD = "password"
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -122,8 +124,8 @@ class SignUpActivity : AppCompatActivity() {
         Storage.saveUser(user)
         val intent = Intent(this, SignInActivity::class.java)
         intent.apply {
-            putExtra("userId", user.userId)
-            putExtra("password", user.password)
+            putExtra(EXTRA_USER_ID, user.userId)
+            putExtra(EXTRA_PASSWORD, user.password)
         }
         setResult(RESULT_OK, intent)
         showToast("all_valid")

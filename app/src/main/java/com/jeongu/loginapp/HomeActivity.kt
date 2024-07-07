@@ -34,9 +34,9 @@ class HomeActivity : AppCompatActivity() {
         setRandomImage()
 
         val user = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("user", UserInfo::class.java)
+            intent.getParcelableExtra(EXTRA_USER, UserInfo::class.java)
         } else {
-            intent.getParcelableExtra("user")
+            intent.getParcelableExtra(EXTRA_USER)
         }
         user?.let {
             setUserInfo(it)
